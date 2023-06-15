@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+
+
+        const App = () => {
+            const [data, setData] = React.useState([
+                { id: 1, name: 'Onboarding Call' },
+                { id: 3, name: 'Google Search' },
+                { id: 4, name: 'goole App' },
+                { id: 5, name: 'website' },
+                { id: 6, name: 'Technical' },
+                { id: 7, name: 'Anchor' },
+                { id: 8, name: 'Competitor' },
+                { id: 9, name: 'Anchor text' },
+                { id: 10, name: 'Site level' },
+                { id: 11, name: 'on Page' },
+                { id: 12, name: 'Containt' },
+                { id: 13, name: 'Premium press' },
+                { id: 14, name: 'Preimem' },
+                { id: 15, name: 'post' },
+                { id: 16, name: 'Json Data' },
+                { id: 17, name: 'video links' },
+                { id: 18, name: 'Index' },
+                { id: 19, name: 'Review' },
+                // Add more data as needed
+            ]);
+
+            const handleEdit = (id, field, value) => {
+                const updatedData = data.map(item => {
+                    if (item.id === id) {
+                        return { ...item, [field]: value };
+                    }
+                    return item;
+                });
+                setData(updatedData);
+            };
+
+            const handleSave = () => {
+                const postData = data.map(item => ({
+                    id: item.id,
+                    name: item.name,
+                    age: item.age,
+                    email: item.email,
+                }));
+
+                // Logic to post the data to the API
+                // You can send `postData` to your backend or API here
+                console.log('Data:', postData);
+            };
+
+            return (
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Month 1</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map(item => (
+                                <tr key={item.id}>
+                                    <td>
+                                        <input
+                                            type="text"
+                                            value={item.name}
+                                            onChange={e => handleEdit(item.id, 'name', e.target.value)}
+                                        />
+                                    </td>
+
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                    <button onClick={handleSave}>Save</button>
+                </div>
+            );
+        };
+        const container = document.getElementById('mydiv');
+        const root = ReactDOM.createRoot(container);
+        root.render(<App />,)
+    </script>
+
+</body>
+
+</html>
